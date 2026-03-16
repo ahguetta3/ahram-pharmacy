@@ -120,7 +120,7 @@ export default function App() {
       });
       showToast('تم فتح الوردية بنجاح ✓');
       await loadCurrentShift();
-    } catch { showToast('فشل في فتح الوردية', 'error'); }
+    } catch (err) { console.error('❌ خطأ فتح الوردية:', err); showToast('فشل في فتح الوردية', 'error'); }
     finally { setSubmitting(false); }
   };
 
@@ -151,7 +151,15 @@ export default function App() {
       await loadShiftData(currentShift);
       showToast('تم تسجيل المصروف ✓');
       setView('home');
-    } catch { showToast('فشل في تسجيل المصروف', 'error'); }
+    } catch (err) {
+      console.error('❌ خطأ في تسجيل المصروف:', err);
+      const msg = err instanceof Error ? err.message : 'فشل في تسجيل المصروف';
+      if (msg.includes('permission') || msg.includes('PERMISSION')) {
+        showToast('خطأ في الصلاحيات — حدّث قواعد Firestore (راجع DEPLOY.md الخطوة 5)', 'error');
+      } else {
+        showToast(`فشل في تسجيل المصروف: ${msg}`, 'error');
+      }
+    }
     finally { setSubmitting(false); }
   };
 
@@ -173,7 +181,7 @@ export default function App() {
       await loadShiftData(currentShift);
       showToast('تم التحويل بنجاح ✓');
       setView('money-details');
-    } catch { showToast('فشل في التحويل', 'error'); }
+    } catch (err) { console.error('❌ خطأ التحويل:', err); showToast('فشل في التحويل', 'error'); }
     finally { setSubmitting(false); }
   };
 
@@ -192,7 +200,7 @@ export default function App() {
       });
       showToast('تم إغلاق الوردية بنجاح ✓');
       await loadCurrentShift();
-    } catch { showToast('فشل في إغلاق الوردية', 'error'); }
+    } catch (err) { console.error('❌ خطأ إغلاق الوردية:', err); showToast('فشل في إغلاق الوردية', 'error'); }
     finally { setSubmitting(false); }
   };
 
