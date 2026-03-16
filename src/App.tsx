@@ -130,15 +130,24 @@ export default function App() {
     setSubmitting(true);
     const f = new FormData(e.currentTarget);
     try {
-      await addExpense({
+      const source = f.get('source') as 'Cash' | 'Digital';
+      const rawProvider = f.get('digital_provider') as string;
+      const amount = parseFloat(f.get('amount') as string);
+      if (!amount || isNaN(amount) || amount <= 0) {
+        showToast('أدخل مبلغاً صحيحاً', 'error');
+        setSubmitting(false);
+        return;
+      }
+      const expenseData: Record<string, any> = {
         shiftId: currentShift.id,
         category: f.get('category') as string,
-        amount: parseFloat(f.get('amount') as string),
-        source: f.get('source') as 'Cash' | 'Digital',
-        digitalProvider: f.get('digital_provider') as string || undefined,
+        amount,
+        source,
         isFromOpening: f.get('expense_type') === 'Opening',
         description: f.get('description') as string || '',
-      });
+      };
+      if (source === 'Digital' && rawProvider) expenseData['digitalProvider'] = rawProvider;
+      await addExpense(expenseData as any);
       await loadShiftData(currentShift);
       showToast('تم تسجيل المصروف ✓');
       setView('home');
