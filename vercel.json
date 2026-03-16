@@ -5,14 +5,9 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.firebaseio.com https://*.googleapis.com"
+          "value": "default-src 'self' 'unsafe-eval' 'unsafe-inline' https: data: blob:"
         }
       ]
     }
   ]
 }
-```
-
-ثم **File → Save As** واذهب لمجلد `pharmacy_firebase` واكتب في اسم الملف:
-```
-vercel.json
