@@ -208,7 +208,7 @@ export default function App() {
     if (!expenses.length) { showToast('لا توجد بيانات للتصدير', 'error'); return; }
     const headers = ['التاريخ', 'الفئة', 'المبلغ', 'المصدر', 'التطبيق', 'من العهدة', 'الوصف'];
     const rows = expenses.map(e => [
-      new Date(e.timestamp).toLocaleString('ar-EG'),
+      new Date(e.timestamp).toLocaleString('en-US'),
       e.category, e.amount, e.source,
       e.digitalProvider || '', e.isFromOpening ? 'نعم' : 'لا', e.description
     ]);
@@ -328,17 +328,17 @@ export default function App() {
                   </div>
                   <p className="text-stone-400 text-sm mb-1">الرصيد المتوقع</p>
                   <h2 className="text-4xl font-light tracking-tighter mb-5">
-                    {currentCalculatedTotal.toLocaleString('ar-EG')}
+                    {currentCalculatedTotal.toLocaleString('en-US')}
                     <span className="text-lg opacity-40 mr-2">أوقية</span>
                   </h2>
                   <div className="grid grid-cols-2 gap-3">
                     <div className="bg-white/10 rounded-2xl p-3">
                       <p className="text-[10px] text-stone-400 mb-1">مصاريف الوردية</p>
-                      <p className="text-lg font-semibold text-red-300">{activeExpenses.toLocaleString('ar-EG')}</p>
+                      <p className="text-lg font-semibold text-red-300">{activeExpenses.toLocaleString('en-US')}</p>
                     </div>
                     <div className="bg-white/10 rounded-2xl p-3">
                       <p className="text-[10px] text-stone-400 mb-1">سحب من العهدة</p>
-                      <p className="text-lg font-semibold text-amber-300">{openingExpenses.toLocaleString('ar-EG')}</p>
+                      <p className="text-lg font-semibold text-amber-300">{openingExpenses.toLocaleString('en-US')}</p>
                     </div>
                   </div>
                 </div>
@@ -389,7 +389,7 @@ export default function App() {
                         </p>
                       </div>
                       <div className="text-left shrink-0">
-                        <p className="font-bold text-red-500 text-sm">-{exp.amount.toLocaleString('ar-EG')}</p>
+                        <p className="font-bold text-red-500 text-sm">-{exp.amount.toLocaleString('en-US')}</p>
                         <p className="text-[10px] text-stone-400">{new Date(exp.timestamp).toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' })}</p>
                       </div>
                     </div>
@@ -424,7 +424,7 @@ export default function App() {
                 <div className={`p-4 rounded-xl flex justify-between items-center ${shiftIncome >= 0 ? 'bg-emerald-50 border border-emerald-100' : 'bg-red-50 border border-red-100'}`}>
                   <span className="text-sm font-medium">صافي دخل الوردية:</span>
                   <span className={`text-xl font-bold ${shiftIncome >= 0 ? 'text-emerald-700' : 'text-red-600'}`}>
-                    {shiftIncome.toLocaleString('ar-EG')}
+                    {shiftIncome.toLocaleString('en-US')}
                   </span>
                 </div>
               )}
@@ -443,7 +443,7 @@ export default function App() {
                       <p className="text-xs text-stone-400">الرصيد المتوفر</p>
                     </div>
                   </div>
-                  <p className="text-xl font-medium">{getFundBalance(fund).toLocaleString('ar-EG')}</p>
+                  <p className="text-xl font-medium">{getFundBalance(fund).toLocaleString('en-US')}</p>
                 </div>
               ))}
             </div>
@@ -640,11 +640,11 @@ export default function App() {
                       <div className="grid grid-cols-2 gap-2 pt-3 border-t border-stone-50">
                         <div>
                           <p className="text-[10px] text-stone-400">الافتتاحي</p>
-                          <p className="text-sm font-medium">{opening.toLocaleString('ar-EG')}</p>
+                          <p className="text-sm font-medium">{opening.toLocaleString('en-US')}</p>
                         </div>
                         <div className="text-left">
                           <p className="text-[10px] text-stone-400">الإغلاق</p>
-                          <p className="text-sm font-bold text-emerald-600">{closing.toLocaleString('ar-EG')}</p>
+                          <p className="text-sm font-bold text-emerald-600">{closing.toLocaleString('en-US')}</p>
                         </div>
                       </div>
                     </div>
@@ -675,11 +675,11 @@ export default function App() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-white/10 rounded-xl p-3">
                   <p className="text-[10px] text-stone-400 mb-1">مصاريف الورديات</p>
-                  <p className="text-lg font-semibold text-red-300">{monthlyShiftExpenses.toLocaleString('ar-EG')}</p>
+                  <p className="text-lg font-semibold text-red-300">{monthlyShiftExpenses.toLocaleString('en-US')}</p>
                 </div>
                 <div className="bg-white/10 rounded-xl p-3">
                   <p className="text-[10px] text-stone-400 mb-1">سحب من العهدة</p>
-                  <p className="text-lg font-semibold text-amber-300">{monthlyOpeningExpenses.toLocaleString('ar-EG')}</p>
+                  <p className="text-lg font-semibold text-amber-300">{monthlyOpeningExpenses.toLocaleString('en-US')}</p>
                 </div>
               </div>
             </div>
@@ -697,7 +697,7 @@ export default function App() {
                         <div>
                           <p className="text-sm font-medium">{new Date(date).toLocaleDateString('ar-EG', { weekday: 'short', day: 'numeric', month: 'short' })}</p>
                         </div>
-                        <p className="font-bold text-stone-900">{total.toLocaleString('ar-EG')}</p>
+                        <p className="font-bold text-stone-900">{total.toLocaleString('en-US')}</p>
                       </div>
                     ))}
               </div>
