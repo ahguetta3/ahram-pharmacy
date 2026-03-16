@@ -88,8 +88,8 @@ export default function App() {
     };
     const opening = openingMap[fund] || 0;
     const spent = expenses
-      .filter(e => (e.source === 'Cash' && fund === 'Cash') || (e.source === 'Digital' && e.digitalProvider === fund))
-      .reduce((s, e) => s + e.amount, 0);
+  .filter(e => e.isFromOpening && ((e.source === 'Cash' && fund === 'Cash') || (e.source === 'Digital' && e.digitalProvider === fund)))
+  .reduce((s, e) => s + e.amount, 0);
     const inFlow = transfers.filter(t => t.toFund === fund).reduce((s, t) => s + t.amount, 0);
     const outFlow = transfers.filter(t => t.fromFund === fund).reduce((s, t) => s + t.amount, 0);
     return opening - spent + inFlow - outFlow;
